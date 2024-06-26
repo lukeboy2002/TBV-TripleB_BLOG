@@ -19,25 +19,37 @@
     </head>
     <body class="font-sans antialiased">
         <x-banner />
+        <x-header />
+        @livewire('navigation-menu')
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
-
+        <div class="min-h-screen bg-gray-50 dark:bg-gray-700">
             <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
+            @if (isset($hero))
+            <hero class="bg-gray-50 dark:bg-gray-700">
+                <div class="w-full mx-auto">
+                    {{ $hero }}
+                </div>
+            </hero>
             @endif
 
             <!-- Page Content -->
-            <main>
+            @if (isset($side))
+            <div class="max-w-7xl mx-auto flex flex-wrap py-10 sm:px-6 lg:px-8">
+                <main class="w-full md:w-3/4 flex flex-col px-3">
+                    {{ $slot }}
+                </main>
+                <aside class="w-full md:w-1/4 flex flex-col px-3">
+                    {{ $side }}
+                </aside>
+            </div>
+            @else
+            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 {{ $slot }}
-            </main>
+            </div>
+            @endif
         </div>
 
+        <x-footer />
         @stack('modals')
 
         @livewireScripts
