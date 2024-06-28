@@ -2,7 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\CategoryPost;
+use App\Models\Comment;
+use App\Models\Post;
 use App\Models\Role;
+use App\Models\Sponsor;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,9 +23,25 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RolesAndPermissionsSeeder::class);
 
+        $users = User::factory(10)->create();
+        foreach ($users as $user) {
+            $role = Role::select('id')->where('name', 'user')->first();
+            $user->roles()->attach($role);
+        }
+
+        $posts = Post::factory(200)->recycle($users)->create();
+
+        $comments = Comment::factory(100)->recycle($users)->recycle($posts)->create();
+
+        $categories = Category::factory(30)->create();
+
+        $categorypost = CategoryPost::factory(100)->recycle($categories)->recycle($posts)->create();
+
+        $sponsors = Sponsor::factory(10)->create();
+
         $admin = User::factory()
-//            ->has(Post::factory(45))
-//            ->has(Comment::factory(120)->recycle($posts))
+            ->has(Post::factory(45))
+            ->has(Comment::factory(120)->recycle($posts))
             ->create([
                 'username' => 'admin',
                 'email' => 'admin@test.com',
@@ -30,12 +51,5 @@ class DatabaseSeeder extends Seeder
             ]);
         $role = Role::select('id')->where('name', 'admin')->first();
         $admin->roles()->attach($role);
-
-        User::factory(10)->create();
-
-//        User::factory()->create([
-//            'name' => 'Test User',
-//            'email' => 'test@example.com',
-//        ]);
     }
 }
