@@ -40,9 +40,9 @@ class Post extends Model
         ];
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function comments(): HasMany
@@ -82,5 +82,12 @@ class Post extends Model
     public function getFormattedDate()
     {
         return $this->published_at->format('F jS Y');
+    }
+
+    public function getReadingTime()
+    {
+        $mins = round(str_word_count($this->body) / 250);
+
+        return ($mins < 1) ? 1 : $mins;
     }
 }

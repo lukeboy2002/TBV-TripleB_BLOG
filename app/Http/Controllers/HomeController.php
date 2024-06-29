@@ -14,13 +14,13 @@ class HomeController extends Controller
     {
         $featuredPosts = Post::published()
             ->featured()
-            ->with('user', 'categories')
+            ->with('author', 'categories')
             ->latest('published_at')
             ->take(1)
             ->get();
 
         $latestPosts = Post::published()
-            ->with('user', 'categories')
+            ->with('author', 'categories')
             ->latest('published_at')
             ->take(3)
             ->get();

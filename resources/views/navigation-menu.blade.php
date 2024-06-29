@@ -11,9 +11,12 @@
 {{--                </div>--}}
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-4 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                         {{ __('Home') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.*')">
+                        {{ __('Blog') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -48,7 +51,7 @@
                                             {{ __('Manage Account') }}
                                         </div>
 
-                                        <x-dropdown-link href="{{ route('profile.show') }}">
+                                        <x-dropdown-link wire:navigate href="{{ route('profile.show') }}">
                                             {{ __('Profile') }}
                                         </x-dropdown-link>
                                         <div class="border-t border-orange-500/30"></div>
@@ -90,8 +93,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-nav-responsive-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-nav-responsive-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                {{ __('Home') }}
+            </x-nav-responsive-link>
+            <x-nav-responsive-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.*')">
+                {{ __('Blog') }}
             </x-nav-responsive-link>
         </div>
 

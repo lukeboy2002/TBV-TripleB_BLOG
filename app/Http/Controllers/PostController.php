@@ -12,7 +12,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return view('posts.index', [
+            'posts' => Post::take(9)->with('author', 'categories', 'comments')->get()
+        ]);
     }
 
     /**

@@ -26,7 +26,7 @@
             <!-- Page Heading -->
             @if (isset($hero))
             <hero class="bg-gray-50 dark:bg-gray-700">
-                <div class="w-full mx-auto">
+                <div class="relative h-40 md:h-56 lg:h-72 w-full">
                     {{ $hero }}
                 </div>
             </hero>
@@ -34,7 +34,7 @@
 
             <!-- Page Content -->
             @if (isset($side))
-            <div class="max-w-7xl mx-auto flex flex-wrap py-10 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto flex flex-wrap py-4 sm:px-6 lg:px-8">
                 <main class="w-full md:w-3/4 flex flex-col px-3">
                     {{ $slot }}
                 </main>
