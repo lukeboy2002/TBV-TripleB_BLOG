@@ -22,7 +22,7 @@
         <x-header />
         @livewire('navigation-menu')
 
-        <div class="min-h-screen bg-gray-50 dark:bg-gray-700">
+        <div class="min-h-screen bg-gray-50 dark:bg-gray-700 px-4 sm:px-0">
             <!-- Page Heading -->
             @if (isset($hero))
             <hero class="bg-gray-50 dark:bg-gray-700">
